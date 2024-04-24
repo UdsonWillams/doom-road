@@ -51,8 +51,12 @@ sleep(4.5)
 
 janela_aberta = True
 
-pygame.mixer.music.load('music.wav')
-pygame.mixer.music.play(-1)
+
+pygame.mixer.init()
+song_1 = pygame.mixer.Sound('music.wav')
+song_1.play(-1)
+#pygame.mixer.music.load('music.wav')
+#pygame.mixer.music.play(-1)
 
 while janela_aberta:
 
@@ -61,13 +65,13 @@ while janela_aberta:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             janela_aberta = False
-
+     
     comandos = pygame.key.get_pressed()
 
-    # if comandos[pygame.K_w]:
-    #    y -= velocidade
-    # if comandos[pygame.K_s]:
-    #    y += velocidade
+    if comandos[pygame.K_w]:
+        y -= velocidade
+    if comandos[pygame.K_s]:
+        y += velocidade
     if comandos[pygame.K_d] and x <= 510:
         x += velocidade
     if comandos[pygame.K_a] and x >= 170:
@@ -76,6 +80,8 @@ while janela_aberta:
     # DETECTOR DE COLISÃO
 
     if x + 75 > (pos_x + 320) and y - 170 < pos_y_carro3: # COLISAO DA DIREITA, CARRO 3
+        pygame.mixer_music.load("batida.mp3")
+        pygame.mixer_music.play(0)
         y = 1000        #l 420 > 500 e 190 < -350
         vida -= 1
         x = 350  # 350 carro no meio / 510 o maximo para a direita / 170 o maximo para a esquerda
@@ -85,6 +91,8 @@ while janela_aberta:
         pos_y_carro2 = -200
         pos_y_carro3 = -400
     if x - 75 < pos_x and y - 170 < pos_y_carro1: # COLISAO DA ESQUERDA, CARRO 1
+        pygame.mixer_music.load("batida.mp3")
+        pygame.mixer_music.play(0)
         y = 1000        #x = 350y = 360posx = 180
         vida -= 1
         x = 350  # 350 carro no meio / 510 o maximo para a direita / 170 o maximo para a esquerda
@@ -95,6 +103,8 @@ while janela_aberta:
         pos_y_carro3 = -400
 
     if x + 75 > (pos_x + 160) and y - 170 < pos_y_carro2 and (x - 75 < (pos_x + 160) and y + 170 > pos_y_carro2):
+        pygame.mixer_music.load("batida.mp3")
+        pygame.mixer_music.play(0)
         y = 1200                # 420 > 340 e 190 < -200  e 280 < 340 e 440 > -200
         vida -= 1                           #     v  e f                    v e v
         x = 350  # 350 carro no meio / 510 o maximo para a direita / 170 o maximo para a esquerda
@@ -142,6 +152,8 @@ while janela_aberta:
     texto2 = font.render("VIDAS: " + str(vida), True, (255, 0, 0), (0, 0, 0))
     pygame.display.update()
     if vida <= 0:
+        pygame.mixer_music.load("batida.mp3")
+        pygame.mixer_music.play(0)
         pygame.mixer.music.stop()
         gameover = pygame.image.load("gameover.png")
         del fundo
