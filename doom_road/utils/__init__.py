@@ -1,0 +1,1 @@
+"""Utils do Doom Road."""
