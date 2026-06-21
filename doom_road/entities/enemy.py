@@ -12,11 +12,11 @@ import random
 import pygame
 
 from doom_road.utils.constants import (
+    CAR_SIZE,
     DIFFICULTY_MAX_SPEED,
     ENEMY_MIN_SPEED,
     ENEMY_SPEED_RANGE,
     ENEMY_Y_RANGES,
-    SPRITE_SCALE,
 )
 from doom_road.utils.resource_loader import load_image
 
@@ -31,8 +31,9 @@ class Enemy(pygame.sprite.Sprite):
         self.lane_x = lane_x
         self.lane_index = lane_index
 
-        self.image = load_image(random.choice(_ENEMY_SPRITES), scale=SPRITE_SCALE)
+        self.image = load_image(random.choice(_ENEMY_SPRITES), size=CAR_SIZE)
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect.x = lane_x
         self._y = float(self.rect.y)
 

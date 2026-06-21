@@ -18,7 +18,6 @@ from doom_road.utils.constants import (
     ENEMY_LANES,
     ENEMY_SPEED_RANGE,
     FPS,
-    HITBOX_RATIO,
     INITIAL_LIVES,
     RED,
     SCREEN_HEIGHT,
@@ -168,7 +167,7 @@ class Game:
             self.player,
             self.enemies,
             False,
-            pygame.sprite.collide_rect_ratio(HITBOX_RATIO),
+            pygame.sprite.collide_mask,
         )
         if hits:
             if self.crash_sound:

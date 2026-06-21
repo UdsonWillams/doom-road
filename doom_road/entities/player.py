@@ -7,6 +7,7 @@ from collections.abc import Sequence
 import pygame
 
 from doom_road.utils.constants import (
+    CAR_SIZE,
     PLAYER_CLAMP_VERTICAL,
     PLAYER_MAX_X,
     PLAYER_MIN_X,
@@ -14,7 +15,6 @@ from doom_road.utils.constants import (
     PLAYER_START_X,
     PLAYER_START_Y,
     SCREEN_HEIGHT,
-    SPRITE_SCALE,
 )
 from doom_road.utils.resource_loader import load_image
 
@@ -24,8 +24,9 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self) -> None:
         super().__init__()
-        self.image = load_image("carro.png", scale=SPRITE_SCALE)
+        self.image = load_image("carro.png", size=CAR_SIZE)
         self.rect = self.image.get_rect()
+        self.mask = pygame.mask.from_surface(self.image)
         self._x = 0.0
         self._y = 0.0
         self.reset()

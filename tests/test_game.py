@@ -81,6 +81,14 @@ def test_end_screen_exits_after_timer() -> None:
     assert g.running is False
 
 
+def test_sprites_have_collision_masks() -> None:
+    """collide_mask exige .mask no player e em cada inimigo."""
+    g = _make_game()
+    assert isinstance(g.player.mask, pygame.mask.Mask)
+    for e in g.enemy_list:
+        assert isinstance(e.mask, pygame.mask.Mask)
+
+
 def test_enemies_recycle_off_screen() -> None:
     """Inimigo que sai da tela é reciclado para o range da faixa."""
     g = _make_game()
